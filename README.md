@@ -1,4 +1,4 @@
-##### An extremely simple and lightweight key-value store. Written in [go](https://github.com/golang/go) using [fiber](https://github.com/gofiber/fiber), because it's *fast*.
+### An extremely simple and lightweight key-value store. Written in [go](https://github.com/golang/go) using [fiber](https://github.com/gofiber/fiber), because it's *fast*.
 
 ## Why?
 
