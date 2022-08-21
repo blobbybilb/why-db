@@ -42,10 +42,6 @@ It's very, very simple.
    
    del (deletes value):
    GET /del/<category>/<key>/
-   
-   
-   
-   
    ```
    
    ```bash
