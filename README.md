@@ -7,13 +7,13 @@ Because I needed something simple to store/access data on a local server (for a 
 Basically, I wanted to be able to do this:
 
 ```bash
-go run main.go  # Running on X.X.X.X:34578
+go run main.go  # Running on X.X.X.X:5000
 ```
 
 ```python
-requests.get(f"http://X.X.X.X:34578/set/example/{key}/{data}")
+requests.get(f"http://X.X.X.X:5000/set/example/{key}/{data}")
 
-requests.get(f"http://X.X.X.X:34578/get/example/{key}").text  # data
+requests.get(f"http://X.X.X.X:5000/get/example/{key}").text  # data
 ```
 
 ## Usage
@@ -46,8 +46,8 @@ It's very, very simple.
    
    ```bash
    # Examples:
-   curl http://127.0.0.1:34578/set/example/somekey/somevalue/
-   curl http://127.0.0.1:34578/get/example/somekey/  # somevalue
+   curl http://127.0.0.1:5000/set/example/somekey/somevalue/
+   curl http://127.0.0.1:5000/get/example/somekey/  # somevalue
    ```
 
 ## Limitations
