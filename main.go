@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-const dataDir = "data/"
+const dataDir = "./data/"
 
 func createDirIfNotExists(path string) {
 	path = dataDir + path
@@ -20,7 +20,7 @@ func main() {
 
 	app.Get("/set/:dir/:file/*", func(c *fiber.Ctx) error {
 		dir, file, data := c.Params("dir"), c.Params("file"), c.Params("*")
-		filePath := "./" + dataDir + dir + "/" + file
+		filePath := dataDir + dir + "/" + file
 
 		createDirIfNotExists(dir)
 		_ = os.WriteFile(filePath, []byte(data), 0644)
@@ -29,9 +29,8 @@ func main() {
 	})
 
 	app.Post("/set/:dir/:file/", func(c *fiber.Ctx) error {
-		// save POST data to file
 		dir, file := c.Params("dir"), c.Params("file")
-		filePath := "./" + dataDir + dir + "/" + file
+		filePath := dataDir + dir + "/" + file
 
 		createDirIfNotExists(dir)
 		_ = os.WriteFile(filePath, c.Body(), 0644)
@@ -40,14 +39,14 @@ func main() {
 
 	app.Get("/get/:dir/:file/", func(c *fiber.Ctx) error {
 		dir, file := c.Params("dir"), c.Params("file")
-		filePath := "./" + dataDir + dir + "/" + file
+		filePath := dataDir + dir + "/" + file
 		text, _ := os.ReadFile(filePath)
 		return c.SendString(string(text))
 	})
 
 	app.Get("/add/:dir/:file/*", func(c *fiber.Ctx) error {
 		dir, file, data := c.Params("dir"), c.Params("file"), c.Params("*")
-		filePath := "./" + dataDir + dir + "/" + file
+		filePath := dataDir + dir + "/" + file
 
 		createDirIfNotExists(dir)
 		appendFile, _ := os.OpenFile(filePath, os.O_APPEND|os.O_WRONLY, 0644)
@@ -59,7 +58,7 @@ func main() {
 
 	app.Post("/add/:dir/:file/*", func(c *fiber.Ctx) error {
 		dir, file := c.Params("dir"), c.Params("file")
-		filePath := "./" + dataDir + dir + "/" + file
+		filePath := dataDir + dir + "/" + file
 
 		createDirIfNotExists(dir)
 		appendFile, _ := os.OpenFile(filePath, os.O_APPEND|os.O_WRONLY, 0644)
@@ -71,7 +70,7 @@ func main() {
 
 	app.Get("/del/:dir/:file/", func(c *fiber.Ctx) error {
 		dir, file := c.Params("dir"), c.Params("file")
-		filePath := "./" + dataDir + dir + "/" + file
+		filePath := dataDir + dir + "/" + file
 
 		_ = os.Remove(filePath)
 		return c.SendString("done")

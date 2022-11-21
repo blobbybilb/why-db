@@ -1,4 +1,4 @@
-module data-save
+module why-db
 
 go 1.19
 
