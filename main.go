@@ -7,22 +7,23 @@ import (
 
 	"whydb/config"
 	"whydb/filestore"
+	"whydb/postgresstore"
 	"whydb/types"
 )
 
 func getStore() types.Store {
 	switch config.StoreType {
 	case "file":
-
 		return filestore.NewFileStore()
+	case "postgres":
+		return postgresstore.NewPostgresStore()
 	default:
-		return filestore.NewFileStore()
+		panic("invalid StoreType in config, please set a valid StoreType")
 	}
 }
 
 func main() {
 	app := fiber.New()
-
 	store := getStore()
 
 	app.Get("/set/:cat/:key/*", func(c *fiber.Ctx) error {
@@ -60,5 +61,6 @@ func main() {
 		store.Del(cat, key)
 		return c.SendString("done")
 	})
+
 	_ = app.Listen(config.Address + ":" + fmt.Sprint(config.Port))
 }
