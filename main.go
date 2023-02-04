@@ -28,38 +28,60 @@ func main() {
 
 	app.Get("/set/:cat/:key/*", func(c *fiber.Ctx) error {
 		cat, key, data := c.Params("cat"), c.Params("key"), c.Params("*")
-		store.Set(cat, key, data)
+		err := store.Set(cat, key, data)
+		if err != nil {
+			return c.SendString(err.Error())
+		}
 		return c.SendString("done")
 	})
 
 	app.Post("/set/:cat/:key/", func(c *fiber.Ctx) error {
 		cat, key := c.Params("cat"), c.Params("key")
-		store.Set(cat, key, string(c.Body()))
+		err := store.Set(cat, key, string(c.Body()))
+		if err != nil {
+			return c.SendString(err.Error())
+		}
 		return c.SendString("done")
 	})
 
 	app.Get("/get/:cat/:key/", func(c *fiber.Ctx) error {
 		cat, key := c.Params("cat"), c.Params("key")
-		text, _ := store.Get(cat, key)
+		text, err := store.Get(cat, key)
+		if err != nil {
+			return c.SendString(err.Error())
+		}
 		return c.SendString(string(text))
 	})
 
 	app.Get("/add/:cat/:key/*", func(c *fiber.Ctx) error {
 		cat, key, data := c.Params("cat"), c.Params("key"), c.Params("*")
-		store.Add(cat, key, data)
+		err := store.Add(cat, key, data)
+		if err != nil {
+			return c.SendString(err.Error())
+		}
 		return c.SendString("done")
 	})
 
 	app.Post("/add/:cat/:key/*", func(c *fiber.Ctx) error {
 		cat, key := c.Params("cat"), c.Params("key")
-		store.Add(cat, key, string(c.Body()))
+		err := store.Add(cat, key, string(c.Body()))
+		if err != nil {
+			return c.SendString(err.Error())
+		}
 		return c.SendString("done")
 	})
 
 	app.Get("/del/:cat/:key/", func(c *fiber.Ctx) error {
 		cat, key := c.Params("cat"), c.Params("key")
-		store.Del(cat, key)
+		err := store.Del(cat, key)
+		if err != nil {
+			return c.SendString(err.Error())
+		}
 		return c.SendString("done")
+	})
+
+	app.Get("/exists", func(c *fiber.Ctx) error {
+		return c.SendString("exists - why?db 0.2")
 	})
 
 	_ = app.Listen(config.Address + ":" + fmt.Sprint(config.Port))

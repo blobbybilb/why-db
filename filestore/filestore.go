@@ -38,6 +38,7 @@ func NewFileStore() types.Store {
 			err := os.WriteFile(filePath, []byte(data), 0644)
 			if err != nil {
 				fmt.Printf("Error writing file %v", err)
+				return fmt.Errorf("why?db: error setting key")
 			}
 			return nil
 		},
@@ -46,6 +47,7 @@ func NewFileStore() types.Store {
 			text, err := os.ReadFile(filePath)
 			if err != nil {
 				fmt.Printf("Error reading file %v", err)
+				return "", fmt.Errorf("why?db: error getting key")
 			}
 			return string(text), nil
 		},
@@ -56,10 +58,12 @@ func NewFileStore() types.Store {
 			appendFile, err1 := os.OpenFile(filePath, os.O_APPEND|os.O_WRONLY, 0644)
 			if err1 != nil {
 				fmt.Printf("Error opening file %v", err1)
+				return fmt.Errorf("why?db: error adding to key")
 			}
 			_, err2 := appendFile.WriteString(data)
 			if err2 != nil {
 				fmt.Printf("Error appending to file %v", err2)
+				return fmt.Errorf("why?db: error adding to key")
 			}
 			_ = appendFile.Close()
 
@@ -71,6 +75,7 @@ func NewFileStore() types.Store {
 			err := os.Remove(filePath)
 			if err != nil {
 				fmt.Printf("Error deleting file %v", err)
+				return fmt.Errorf("why?db: error deleting key")
 			}
 
 			return nil

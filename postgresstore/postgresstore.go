@@ -44,7 +44,8 @@ func NewPostgresStore() types.Store {
 
 			_, err := db.Exec("INSERT INTO "+cat+" (key, data) VALUES ($1, $2) ON CONFLICT (key) DO UPDATE SET data = ($2)", key, data)
 			if err != nil {
-				log.Fatalf("Error inserting data %v", err)
+				fmt.Printf("Error inserting data %v", err)
+				return fmt.Errorf("why?db: error setting key")
 			}
 
 			return nil
@@ -54,6 +55,7 @@ func NewPostgresStore() types.Store {
 			err := db.QueryRow("SELECT data FROM "+cat+" WHERE key = $1", key).Scan(&text)
 			if err != nil {
 				fmt.Printf("Error getting data")
+				return "", fmt.Errorf("why?db: error getting key")
 			}
 
 			return text, nil
@@ -66,10 +68,12 @@ func NewPostgresStore() types.Store {
 			err1 := db.QueryRow("SELECT data FROM "+cat+" WHERE key = $1", key).Scan(&text)
 			if err1 != nil {
 				fmt.Printf("Error getting data %v", err1)
+				return fmt.Errorf("why?db: error adding to key")
 			}
 			_, err2 := db.Exec("INSERT INTO "+cat+" (key, data) VALUES ($1, $2) ON CONFLICT (key) DO UPDATE SET data = ($2)", key, text+data)
 			if err2 != nil {
 				log.Fatalf("Error inserting data %v", err)
+				return fmt.Errorf("why?db: error adding to key")
 			}
 
 			return nil
@@ -78,6 +82,7 @@ func NewPostgresStore() types.Store {
 			_, err := db.Exec("DELETE FROM "+cat+" WHERE key = $1", key)
 			if err != nil {
 				fmt.Printf("Error deleting data %v", err)
+				return fmt.Errorf("why?db: error deleting key")
 			}
 			return nil
 		},
