@@ -22,7 +22,7 @@ func getStore() types.Store {
 	}
 }
 
-func main() {
+func start(domain string, port int) {
 	app := fiber.New()
 	store := getStore()
 
@@ -84,5 +84,9 @@ func main() {
 		return c.SendString("exists - why?db 0.2")
 	})
 
-	_ = app.Listen(config.Address + ":" + fmt.Sprint(config.Port))
+	_ = app.Listen(domain + ":" + fmt.Sprint(port))
+}
+
+func main() {
+	start(config.Address, config.Port)
 }

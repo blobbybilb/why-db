@@ -4,10 +4,10 @@ const (
 	Address = "0.0.0.0"
 	Port    = 6010
 
-	StoreType = "postgres" // "file" or "postgres"
+	StoreType = "file" // "file" or "postgres"
 
 	// file store config
-	DataDir = "~/.whydb/data/"
+	DataDir = "./data/"
 
 	// postgres store config
 	PostgresHost = "<DB URL>"
