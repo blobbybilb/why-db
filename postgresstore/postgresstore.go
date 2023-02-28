@@ -72,7 +72,7 @@ func NewPostgresStore() types.Store {
 			}
 			_, err2 := db.Exec("INSERT INTO "+cat+" (key, data) VALUES ($1, $2) ON CONFLICT (key) DO UPDATE SET data = ($2)", key, text+data)
 			if err2 != nil {
-				log.Fatalf("Error inserting data %v", err)
+				fmt.Printf("Error inserting data %v", err)
 				return fmt.Errorf("why?db: error adding to key")
 			}
 
