@@ -1,6 +1,6 @@
 # why?db
 
-### An extremely simple and lightweight key-value store. Written in [go](https://github.com/golang/go) using [fiber](https://github.com/gofiber/fiber), because it's _fast_.
+### An extremely simple and lightweight HTTP key-value store. Written in [go](https://github.com/golang/go) using [fiber](https://github.com/gofiber/fiber), because it's _fast_.
 
 #### It can also use a Postgres DB as storage, while still having the same nice & simple HTTP key-value store.
 
