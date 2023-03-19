@@ -20,7 +20,7 @@ fetch(`http://X.X.X.X:6010/set/example/${key}/${data}`)
 fetch(f"http://X.X.X.X:6010/get/example/{key}") // data as text body
 ```
 
-Then I also thought that it'd be nice to be able to use an SQL DB as storage for the key-value store (mostly to allow using a cloud SQL DB), so now it can only use a Postgres DB as storage.
+Then I also thought that it'd be nice to be able to use an SQL DB as storage for the key-value store (mostly to allow using a cloud SQL DB), so now it can also use a Postgres DB as storage.
 
 ## Usage
 
