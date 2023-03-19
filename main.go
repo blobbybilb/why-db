@@ -62,7 +62,7 @@ func start(domain string, port int) {
 		return c.SendString("done")
 	})
 
-	app.Post("/add/:cat/:key/*", func(c *fiber.Ctx) error {
+	app.Post("/add/:cat/:key/", func(c *fiber.Ctx) error {
 		cat, key := c.Params("cat"), c.Params("key")
 		err := store.Add(cat, key, string(c.Body()))
 		if err != nil {
