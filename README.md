@@ -1,3 +1,7 @@
+Note: This is a simple key-value store over HTTP, and not very useful except for quick prototyping. For a proper go embedded DB, take a look at [gobble-db](https://github.com/blobbybilb/gobble-db).
+
+---
+
 # why?db
 
 ### An extremely simple and lightweight HTTP key-value store. Written in [go](https://github.com/golang/go) using [fiber](https://github.com/gofiber/fiber), because it's _fast_.
